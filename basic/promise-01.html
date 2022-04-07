@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      // 1. 비동기적 프로그래밍(Async)
+      // 자바스크립트는 실행을 멈추지 않고 동시에 여러개 작업 가능
+      // ex. fetch 로 웹 데이터를 가져올 경우
+      // const hello = fetch("http://google.com");
+      // console.log("something");
+      // 순차적으로 처리됐다면 fetch 에 대한 error 메시지가 먼저 나오고 콘솔이 찍혀야 하지만
+      // 콘솔이 먼저 찍히고 그 다음에 fetch 실패에 대한 에러 메시지가 나옴
+      // -> 위에서부터 아래로 실행되지만 fetch 와 관련된 어떤 action 이 실패하고 그 action 실패에 대한 메시지는 console 다음에 출력됨
+      // = 자바스크립트는 순차적으로 실행되지 않고 한꺼번에 실행
+
+      // 2. promise
+      // 비동기 작업이 맞이할 미래의 완료 또는 실패와 그 결과값을 나타내는 것
+      const testPromise = new Promise( (resolve, reject) => {
+
+        setTimeout( () => {
+          resolve("resolve");
+        }, 3000);
+        // 2-1. resolve : promise 에서 function 을 실행하고 성공했을 때 값을 JS에게 돌려주는 것
+        // -> resolve function 을 실행해야 promise 를 resolve 하고 promise 를 끝낼 수 있음
+        // 2-2. reject : promise 에서 reject 되어 값이 없음
+      });
+      console.log(testPromise);
+      
+      // setInterval( () => {
+      //   console.log(testPromise);
+      // }, 1000);
+      // cf. 위의 setInterval 을 아래처럼 쓸 수 있음
+      setInterval(console.log, 1000, testPromise);
+
+      // 즉, promise는 내가 아직 모르는 value와 함께 작업할 수 있게 해줌
+      // 자바스크립트에서 어떤 작업을 하고 그 작업이 끝나면 그 값을 나에게 돌려주는 것...?
+    </script>
+  </body>
+</html>

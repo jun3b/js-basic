@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+
+      const getMoviesPromise = () => {
+        fetch("https://yts.mx/api/v2/list_movies.json")
+        .then( response => response.json())
+        .then( json => console.log(json))
+        .catch( err => console.log(`❌${err}`));
+      }
+
+      // 1. Async/Await
+      // promise 를 사용하는 코드를 더 보기 좋게 만드는 문법(.then 을 남발하지 않도록...)
+      // then 이나 catch 없이 Promise 밖에서 값을 가져올 수 있음
+      const getMoviesAsync = async() => {
+        // async 에서는 then 대신 promise 를 넣을 변수를 선언함
+        // -> resolve 된 값을 선언한 변수에 넣어줌
+        const response = await fetch("https://yts.mx/api/v2/list_movies.json");
+        const json = await response.json();
+        // await : promise가 끝나길 기다리는 것 (resolve 되든 reject 되든 상관없이)
+        // cf. await 는 항상 async Fn 안에서만 사용 가능
+        console.log(json);
+
+        const movies = json.data.movies;
+        console.log(movies);
+      }
+
+      // 2. Async Fn 에서 try catch finally 사용
+      const asyncTryCatch = async() => {
+        try {
+          const response = await fetch("https://yts.mx/api/v2/list_movies.json/");
+          const json = await response.json();
+          console.log(json);
+          throw Error("throw Error");
+          // catch 가 await 안에 있는 error만 잡아내는 것이 아니라 try 안에 있는 영역에서 발생하는 모든 에러를 잡아냄
+        } catch(e) {
+          console.log(`❌${e}`);
+        } finally {
+          console.log("Done!");
+        }
+      };
+
+      // 3. asyncPromiseAll
+      const asyncPromiseAll = async() => {
+        try {
+          const [moviesResponse, upcomingResponse] = await Promise.all([
+            fetch("https://yts.mx/api/v2/list_movies.json"),
+            fetch("https://yts.mx/api/v2/movie_suggestions.json?movie_id=100"),
+          ]);
+
+          const [movies, upcoming] = await Promise.all([
+            moviesResponse.json(),
+            upcomingResponse.json(),
+          ]);
+
+          console.log(movies, upcoming);
+        } catch(e) {
+          console.log(`❌${e}`);
+        } finally {
+          console.log("Done!");
+        }
+      }
+
+      asyncPromiseAll();
+    
+    </script>
+  </body>
+</html>

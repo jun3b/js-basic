@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      // default value 추가하기
+      function sayHi(aName) {
+        return "Hello " + aName;
+      }
+      console.log(sayHi());
+
+      function sayHi2(aName) {
+        return "Hello " + (aName || "unknown1");
+      }
+      console.log(sayHi2());
+
+      function sayHi3(aName = "unknown2") {
+        return "Hello " + aName;
+      }
+      console.log(sayHi3());
+
+      // -------- arrow function --------
+      const sayHi4 = (aName = "unknown3") => "Hello "+aName;
+      console.log(sayHi4());
+
+      const DEFAULT_VALUE = "Default Name";
+      const sayHi5 = (aName = DEFAULT_VALUE) => "Hello "+aName;
+      console.log(sayHi5());
+      
+    </script>
+  </body>
+</html>

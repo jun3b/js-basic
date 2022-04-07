@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      // promise 실제 예시 
+      // fetch : promise 를 return 하는 함수
+      fetch("https://yts.mx/api/v2/list_movies.json")
+      .then( response => {
+        console.log(response);
+        return response.json();
+      })
+      .then( json => console.log(json))
+      .catch( err => console.log(`❌${err}`));
+    </script>
+  </body>
+</html>

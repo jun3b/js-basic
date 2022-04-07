@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      // 1. promise.all
+      // 주어진 모든 promise를 실행한 후 진행되는 하나의 promise를 반환
+      // ex. 한개의 api가 아닌 3개의 api 에서 3개의 값을가져와야 하는 경우
+      // -> promise 가 전부 resolve 되고 나서 마지막 promise를 리턴값으로 주는 것
+
+      const p1 = new Promise( resolve => {
+        setTimeout(resolve, 3000, "First");
+      });
+      const p2 = new Promise( (resolve, reject) => {
+        // setTimeout(resolve, 1000, "Second");
+        setTimeout(reject, 2000, "p2 rejected");
+      });
+      const p3 = new Promise( resolve => {
+        setTimeout(resolve, 1000, "Third");
+      });
+
+      const promiseAll = Promise.all([p1, p2, p3]);
+      promiseAll
+        .then(values => console.log(values))
+        .catch(err => console.log(err));
+      // (1) promise.All 이 다른 promise들이 전부 진행될 때까지 기다렸다가 진행됨
+      // (2) 각각의 promise가 언제 끝나는지는 상관없고 각 값들을 순서에 맞춰 얻게됨
+      // (3) 나오는 값들은 각 function 에서 resolved 된 value 들의 array임
+      // cf. promise들 중에 하나라도 reject되면 promiseAll도 reject됨
+
+      // 2. promise.race
+      // 주어진 모든 promise들 중에 가장 빠른게 실행됨
+      const proiseRace = Promise.race([p1, p2, p3]);
+      proiseRace
+        .then(values => console.log(values))
+        .catch(err => console.log(err));
+
+      // 3. finally
+      // resolve 되든 reject 되든 간에 실행됨
+      // ex. api 호출해서 여러개의 데이터를 얻고 마지막에 로딩을 멈추거나 뭔가를 해야 할 떄 사용...
+      const p4 = new Promise(resolve => {
+        setTimeout(resolve, 3000, "p4");
+      })
+        .then(value => console.log(value))
+        .finally( () => console.log("Finished"))
+
+    </script>
+  </body>
+</html>

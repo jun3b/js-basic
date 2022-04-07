@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+
+      const testPromise = new Promise( (resolve, reject) => {
+        //setTimeout(resolve, 3000, "Promise resolved");
+        setTimeout(reject, 3000, "Promise rejected");
+      });
+      // 1. then : promise 가 resolve 된 이후의 명령어 전달 
+      // 2. catch : promise 가 reject 된 이후의 명령어 전달
+      testPromise
+        .then( result => console.log(result) )
+        .catch( error => console.log(error) );
+      // then 과 catch 는 순차적으로 실행되는게 아니라 then/catch 둘 중 하나만 실행됨
+      // resolve -> then이 실행되고 / reject -> catch 가 실행되는 것
+
+      // cf. 아래처럼 function 으로 보낼 수도 있음
+      //const thenFn = (value) => { console.log(value) };
+      //testPromise.then(thenFn);
+
+    </script>
+  </body>
+</html>
