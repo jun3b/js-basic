@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+
+      // factorial w/o recursion
+      function factorial(num) {
+        let total = 1;
+        for(let i=num; i>0; i--) {
+          total *= i;
+        }
+        return total;
+      }
+
+      // factorial w/ recursion
+      function reFactorial(num) {
+        if(num === 1) return 1;
+        // end point. 종료점이 없으면 음수를 너머 계속 호출함
+        // Maximum call stack size exceedded.
+        // = Stack Overflow 현상
+        return num * reFactorial(num-1);
+      }
+      console.log(reFactorial(5));
+
+      // helper method recursion
+      function collectOddValues(arr) {
+        let result = [];
+
+        function helper(helperInput) {
+          if (helperInput.length === 0) {
+            return;
+          }
+          if (helperInput[0] % 2 !== 0) {
+            result.push(helperInput[0]);
+          }
+          helper(helperInput.slice(1));
+          // helperInput[0] 에 값을 push했으므로 arr의 1번째는 제외하고 재호출
+        }
+        helper(arr);
+
+        return result;
+      }
+      console.log("collectOddValues : "+ collectOddValues([1,2,3,4,5,6,7,8,9]));
+      
+      // pure recursion 
+      function collectOddValues2(arr) {
+        let newArr = [];
+        if (arr.length === 0) {
+          return newArr;
+        }
+        if (arr[0] % 2 !== 0) {
+          newArr.push(arr[0]);
+        }
+        // concat : Combines two or more arrays. This method returns a new array without modifying any existing arrays.
+        newArr = newArr.concat(collectOddValues2(arr.slice(1)));
+        return newArr;
+      }
+      console.log("collectOddValues2 : " + collectOddValues2([1,2,3,4,5,6,7]));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+라이브서버로 실행
+alt + l + o
+
+https://earth-95.tistory.com/87
+참고해서 깃허브 연동
+
+------- 로컬 저장소에 commit 하는 과정
+1. 깃허브 repository 생성 후
+2. vsc 의 source control (메뉴에서 3번째 항목) 클릭
+3. (처음 연동할 경우) initialize Repository 선택하여 초기화
+4. 상단에 로컬 폴더 위치 선택
+5. 현재 폴더에 있는 항목이 모두 changes 항목으로 표시됨
+6. commit 할 파일 위에 마우스 오버해서 + 버튼 클릭하여 staging 으로 변경
+7. 상단의 체크 버튼 √ 클릭 -> commit 시 남길 메모 입력 가능
+------- github 업로드 방법
+8. ctrl + shift + ` 으로 터미널 창 열기
+9. git remote add origin [복사한 깃허브 repository 주소]
+10. git pull origin main --allow-unrelated-histories 로 원격 저장소 항목을 로컬로 땡겨옴
+ (원격 저장소에만 존재하는 항목이 있으면 push를 못해서 하는 것)
+ cf. fatal: couldn't find remote ref main 발생할 경우
+  -> git branch -M main 입력
+11. git push -u origin main 으로 로컬 저장소에 push 한 내용을 원격 저장소에 반영
+
+
