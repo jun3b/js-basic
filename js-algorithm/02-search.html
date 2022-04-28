@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+    // 선형검색 Linear Search : 처음 -> 끝 또는 끝 -> 처음으로 이동하면서 한번에 하나씩 확인
+    // ex. indexOf (일치하는 값 없으면 -1 반환), includes (true/false 반환), find, findIndex
+    
+    // indexOf 사용하지 않고 선형검색
+    function linearSearch(arr, val) {
+      for(let i=0; i<arr.length; i++) {
+        if (arr[i] === val) {
+          return i;
+        }
+      }
+      return -1;
+    }
+    console.log("linearSearch : " + linearSearch([34, 56, 1, 2], 1));
+
+    // 선형검색 BigO -> O(n) 배열이 길어질수록 더 많은 검사 실시
+    </script>
+  </body>
+</html>

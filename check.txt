@@ -19,6 +19,8 @@ https://earth-95.tistory.com/87
  (원격 저장소에만 존재하는 항목이 있으면 push를 못해서 하는 것)
  cf. fatal: couldn't find remote ref main 발생할 경우
   -> git branch -M main 입력
-11. git push -u origin main 으로 로컬 저장소에 push 한 내용을 원격 저장소에 반영
+11. git add *
+12. git commit -m "commit message"
+13. git push -u origin main 으로 로컬 저장소에 push 한 내용을 원격 저장소에 반영
 
 
