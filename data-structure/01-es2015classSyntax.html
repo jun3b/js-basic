@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      // 자료구조 -> 데이터를 저장하는 동일한 기능 제공
+      // 차이점 : 동작 방식, 데이터와 기능들 사이의 관계, 사용되는 메서드 들은 다름
+      
+      // ES2015 는 쉽고 간단하게 자료 구조를 정의할 수 있도록 지원
+      // (클래스의 핵심 용어, 생성자 작성, 새로운 연산자와 인스턴스화 등...)
+
+      // 1. class : 객체를 생성하기 위한 청사진
+      // cf. 자바스크립트는 실제로는 클래스들을 지원하지 않음
+      // -> 프로토타입 기반 상속자 또는 프로토타이핑으로 불리는 무언가를 이용하는 것
+      class Student {
+        // constructor -> student 인스턴스를 인스턴스화 시킬 떄 사용될 메서드
+        constructor(firstName, lastName, year) {
+          this.firstName = firstName;
+          this.lastName = lastName;
+          this.grade = year;
+          //cf. this -> this 의 의미는 내용에 따라 변경되지만 
+          // constructor 내부에서 사용되는 this는 각각의 Student 인스턴스를 의미
+        }
+      }
+      // Student 객체 생성(new 키워드로 해당 클래스의 인스턴스를 생성)
+      let firstStudent = new Student("S1","name1", 4);
+      let secondStudent = new Student("S2","name2", 2);
+    
+      // class 를 정의하는 것 자체로는 어떤 일도 발생하지 않음
+      // -> class 를 정의하는 것은 패턴을 정하는 것
+
+    </script>
+    </div>
+  </body>
+</html>
