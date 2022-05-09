@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      class Student {
+      // 인스턴스 메소드 -> 특정한 단일 인스턴스에 적용되는 기능 제공
+        constructor(firstName, lastName, year) {
+          this.firstName = firstName;
+          this.lastName = lastName;
+          this.grade = year;
+          this.absent = 0;
+          this.scores = [];
+        }
+        
+        fullName() {
+          return `Your full name is ${this.firstName} ${this.lastName}`;
+        }
+        
+        markLate() {
+          this.absent += 1;
+          if (this.absent >= 4) {
+            return `${this.firstName} got F Grade`;
+          }
+          return `${this.firstName} ${this.lastName} has been late ${this.absent} times`;
+        }
+
+        addScore(score) {
+          this.scores.push(score);
+          return this.score;
+        }
+
+        calculateAverage() {
+          let sum = this.scores.reduce(function(a, b) {return a+b;})
+          // cf. reduce 함수 : The return value of the callback function is the accumulated result
+          return sum/this.scores.length;
+        }
+      }
+      let firstStudent = new Student("S1","name1",4);
+      let secondStudent = new Student("S2","name2",3);
+    
+
+
+    </script>
+    </div>
+  </body>
+</html>

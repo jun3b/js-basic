@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      class Point {
+        constructor(x,y) {
+          this.x = x;
+          this.y = y;
+        }
+        // 클래스 메소드
+        // static -> 스태틱 키워드는 클래스의 스태틱 메소드를 정의
+        //        -> 스태틱 메소드는 클래스의 인스턴스화 없이도 호출될 수 있으며 클래스 인스턴스를 통해서는 호출될 수 없음
+        //        -> 어플리케이션의 유틸리티 기능 생성을 위해 주로 사용됨
+        // cf. static은 잘 안씀... 인스턴스 메서드를 주로 쓸 예정
+        static distance(a,b) {
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+
+          return Math.hypot(dx, dy);
+          //hypot : Returns the square root of the sum of squares of its arguments.
+          // -> 두 점 사이의 거리를 계산하는 메서드
+        }
+      }
+
+      const p1 = new Point(5, 5);
+      const p2 = new Point(10, 10);
+      // static 클래스는 Point.distance(); 로 호출 
+      // (인스턴스인 p1.distance() 로 호출하지 않음)
+      console.log(Point.distance(p1, p2));
+
+    </script>
+    </div>
+  </body>
+</html>

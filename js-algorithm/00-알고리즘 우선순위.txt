@@ -1,0 +1,6 @@
+기본) 스택, 큐, 우선순위큐, Deque, 해시맵, 문자열
+초급) PriorityQueue, 완전탐색
+중급) BinarySearch, DFS, BFS, Recursion
+심화) Graph DP
+
+https://skmouse.tistory.com/entry/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B3%B5%EB%B6%80%EB%B0%A9%EB%B2%95
