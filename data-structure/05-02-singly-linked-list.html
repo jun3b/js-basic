@@ -7,34 +7,132 @@
   </head>
   <body>
     <script>
-      // 단방향 연결 리스트 (Singly Linked List)
-      // 1. 문자열, 숫자 등 무엇이든 원하는 데이터를 저장하는 자료구조
-      
-      // 2. 배열처럼 순서에 따라 다수의 데이터 저장
-      // 2-1. 단 배열은 index 가 부여돼서 index로 접근 가능 (arr[3] 처럼...)
-      // 2-2. 링크드 리스트는 인덱스 없이 그냥 다수의 데이터 element 들이 기차처럼 연결된 형태로 구성됨.
-      
-      // 3. 여기서 각각의 element 들을 노드(node)라고 부름
-      // 3-1. 따라서 링크드 리스트들은 다수의 노드들로 구성되고, 각각의 노드는 하나의 데이터 element를 저장
-      // 3-2. 각 노드들은 다음 노드를 가리키는 정보를 저장하고 있으며, 더이상 다음 노드가 없을 경우 null 저장
-      
-      // 4. head : 링크드 리스트의 시작 노드 / tail : 링크드 리스트의 마지막 노드
-      // 4-1. 중간의 노드에 가고 싶으면 첫번째 노드부터 시작해서 다음 노드를 확인해야 함
+      // 링크드 리스트 만들기
+      class Node {
+        constructor(val) {
+          this.val = val;
+          this.next = null;
+          // 처음에는 다음 노드가 없기 때문에 this.next = null;
+        }
+      }
 
-      // 5. 단방향 연결 리스트는 각 노드가 다음 노드로 오직 단일 방향으로만 연결된 형태
-      // cf. 양방향 연결 리스트는 이전 노드를 가리키는 역방향으로도 연결됨
+      class SinglyLinkedList {
+        constructor(){
+          this.head = null;
+          this.tail = null;
+          this.length = 0;
+        }
 
-      // 6. 링크드 리스트 검색 -> 첫번째 노드부터 시작하여 다음 노드에 원하는 데이터가 있는지 하나씩 확인
-      // 7. 링크드 리스트 추가 -> 첫번째 노드부터 시작하여 원하는 위치에 데이터를 추가
-      // 7-1. 배열 -> 모든 요소들에게 새로운 위치 정보를 제공하기 위해 새로운 인덱스를 할당해야 함
-      // 7-2. 링크드 리스트 -> 새로운 노드를 가리키면 됨
+        // 1. push 메소드 구현하기 -> 새로운 노드를 맨 마지막에 삽입
+        push(val) {
+          var newNode = new Node(val);
+          // 비어있는 리스트에 처음 노드를 삽입하면 헤드와 테일이 모두 그 첫번째 노드를 가리킴
+          if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+          } else {
+          // 기존의 리스트에 새로운 노드를 삽입하면 맨 마지막의 tail에 새로운 노드를 삽입하고 tail이 이동함 
+            this.tail.next = newNode;
+            this.tail = newNode;
+          }
+          this.length++;
+          return this;
+        }
 
-      // 정리 - 링크드 리스트 vs Array
-      // 링크드 리스트 
-      // - 인덱스 없음. 각 노드는 next 포인터를 통해 연결되어 있음
-      // - 임의 접근 못함(ex. 10번째 항목이 필요할 경우 그 값을 바로 얻을 수 없으며 첫번째 노드부터 이동해야 함)
-      // - 대신 새로운 항목을 추가하거나 기존 항목을 제거할 경우 편리(인덱스가 없으니까)
-      // = 임의 접근이 필요하지 않은 아주 긴 데이터들이나 많은 정보에 대하여 작업할 때 유용
+        // 2. pop 메소드 구현하기 -> 링크드 리스트의 맨 마지막 노드 제거
+        pop() {
+          // 리스트에 노드가 없을 경우 undefined 반환
+          if(!this.head) return undefined;
+          // 마지막 노드를 제거하기 위해서는 첫번째 노드부터 마지막 노드까지 이동해야함
+          var current = this.head;
+          var newTail = current;
+          while(current.next) {
+            // 리스트에 무언가가 남겨져 있는 한 while로 계속 반복
+            newTail = current;
+            current = current.next;
+          }
+          // console.log(current.val);
+          // console.log(newTail.val);
+          // 마지막 노드 이전의 노드가 tail 이 되고 기존의 마지막 노드는 null
+          this.tail = newTail;
+          this.tail.next = null;
+          this.length--;
+          // 리스트에 있는 노드를 전부 삭제했으면 리스트가 비어있어야 함
+          if(this.length === 0) {
+            this.head = null;
+            this.tail = null;
+          }
+          return current;
+        }
+
+        // 3. shift 메소드 구현하기 -> 맨 앞의 헤드 노드를 제거하고 그 다음 노드가 헤드가 됨
+        shift() {
+          if(!this.head) return undefined;
+
+          var currentHead = this.head;
+          this.head = currentHead.next;
+          this.length--;
+
+          if(this.length == 0) {
+            this.tail = null;
+          }
+          return currentHead;
+        }
+
+        // 4. unshift 메소드 구현하기 -> 새로운 노드를 리스트에 추가
+        // push 와는 다르게 리스트 맨 앞에 노드를 추가
+        unshift(val) {
+          var newNode = new Node(val);
+          // 리스트에 아무 데이터도 없는 경우
+          if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+          } else {
+            // 헤드를 newNode 다음 노드로 옮겼다가 다시 newNode로 옮김
+            // * -> HELLO -> GOODBYE -> !
+            //       head
+            // head
+            newNode.next = this.head;
+            this.head = newNode;
+            // 리스트는 배열과 달리 index가 없으므로 길이만 늘려주면 됨
+            this.length++;
+            // 위의 로직이 else{} 안에 있는게 아닐 경우 !this.head 인 상태에서 shift 로 값 넣었을 때 newNode.next 에 newNode(자기자신)을 지정함
+          }
+          return this;
+        }
+
+        // 5. get 메소드 구현하기 -> 인덱스 혹은 위치를 의미하는 숫자를 인자로 받아서 해당 노드를 return
+        // 리스트는 인덱스가 없으므로 맨 처음 노드부터 시작하여 next로 이동해야 함
+        get(index) {
+          if(index < 0 || index >= this.length) return null;
+          var counter = 0;
+          var current = this.head;
+          while(counter !== index) {
+            current = current.next;
+            counter++;
+          }
+          return current;
+        }
+
+        // 6. set 메소드 구현하기 -> 원하는 index 의 노드의 값을 원하는 값으로 변경함
+        set(index, val) {
+          // get 메소드로 index 에 해당하는 node 값을 가져옴
+          var foundNode = this.get(index);
+          if(foundNode) {
+            foundNode.val = val;
+            return true;
+          }
+          return false;
+        }
+      }
+      
+      var list = new SinglyLinkedList();
+      list.push("Hello");
+      list.push("Goodbye");
+      list.push("!");
+      list.push("<3");
+      list.push(":)");
+
     </script>
     </div>
   </body>
