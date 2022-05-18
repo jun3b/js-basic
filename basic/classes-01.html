@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      // 1. classes => 화려한 object. 객체를 만들기 위한 청사진. 객체를 만드는 공장
+      class User {
+        constructor(name) {
+          this.username = name;
+        }
+        sayHello() {
+          console.log(`hello, i'm ${this.username}`);
+          // 3-1. class 안의 this -> class 그 자체를 가리킴
+          console.log(this);
+        }
+      }
+      // 3-2. class 밖의 this -> class가 아닌 다른걸 가리킴. 자세히는 나중에 알아서...
+      console.log(this);
+
+      // 2. firstUser 인스턴스 생성 (cf. instance : 살아있는 class)
+      const firstUser = new User("nico"); 
+      console.log(firstUser.username);
+      firstUser.sayHello();  // sayHello() 는 User 클래스의 instance 안에 있는 함수
+
+    
+    </script>
+  </body>
+</html>

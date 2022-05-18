@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <div>
+      <h1>Counter One</h1>
+      <span id = "count">  </span>
+      <button id = "plus"> + </button>
+      <button id = "minus"> - </button>
+    </div>
+
+    <div>
+      <h1>Counter Two</h1>
+      <span id = "count2">  </span>
+      <button id = "plus2"> + </button>
+      <button id = "minus2"> - </button>
+    </div>
+    
+
+    <!-- script 가 아래에 있어야 html 태그를 읽어올 수 있네 -->
+    <script>
+      class Counter {
+        constructor({initialNumber = 0, counterId, plusId, minusId}) {
+          this.count = initialNumber;
+          this.counter = document.getElementById(counterId);
+          this.counter.innerText = initialNumber;
+          this.plusBtn = document.getElementById(plusId);
+          this.minusBtn = document.getElementById(minusId);
+          this.addEventListners();
+        }
+
+        addEventListners = () => {
+          this.plusBtn.addEventListener("click", this.increase);
+          this.minusBtn.addEventListener("click", this.decrease);
+        }
+
+        // increase() {
+        //   console.log(this);
+        // }
+        // -> 결과 : <button id="plus"> + </button> 이유는 js강의 10.3 내용 참고
+        // (어쨌든 원인은 eventListener 안에서 this를 호출하면 클래스가 아닌 event target을 가리키는 거라서...?)
+
+        increase = () => {
+          this.count = this.count + 1;
+          this.repaintCount();
+          console.log(this);
+        }
+        // -> 결과 : counter 클래스 그 자체(arrow function 사용)
+
+        decrease = () => {
+          this.count = this.count - 1;
+          this.repaintCount();
+        }
+        repaintCount = () => {
+          this.counter.innerText = this.count;
+        }
+      }
+
+      new Counter({counterId: "count", plusId: "plus", minusId: "minus"});
+      new Counter({counterId: "count2", plusId: "plus2", minusId: "minus2", initialNumber: 1000});
+
+    </script>
+  </body>
+</html>

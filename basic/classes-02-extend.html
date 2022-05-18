@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      class User {
+        constructor(options) {
+          this.username = options.username;
+          this.lastName = options.lastName;
+          this.email = options.email;
+          this.pw = options.pw;
+        }
+        sayHello() {
+          console.log(`hello, i'm ${this.username}`);
+        }
+        getProifile() {
+          console.log(`${this.username}, ${this.email}, ${this.pw}`);
+        }
+        updatePw(newPw, currentPw) {
+          if(currentPw === this.pw) {
+            this.pw = newPw;
+          } else {
+            console.log("can't change pw");
+          }
+        }
+        // 한 개의 unit, 한 개의 큰 object 로 모든 함수를 클래스 안에 담을 수 있음
+      }
+
+      const firstUser = new User({
+        username:"nico", 
+        lastName:"last",
+        email:"nico@ggg.com", 
+        pw:"1234"
+      });
+      firstUser.getProifile();
+
+      console.log(firstUser.pw);
+      const firstUpdatePw = firstUser.updatePw("hello", "1234");
+      console.log(firstUser.pw);
+
+      // class 확장 가능
+      // 실제로 사용할때는 다른 사람들이 만들어놓은 클래스를 재사용해서 사용하므로 기존 클래스에 extends 로 확장해서 사용
+      class Admin extends User {
+        constructor(userOptions, isAdmin) {
+          // this.isAdmin = isAdmin;
+          // 오류 발생 -> constructor 에 요소를 하나 추가하려고 했는데 constructor를 새로 정의함
+          // = 기존의 constructor 을 잃어버림
+          // = super 생성자 필요
+          super(userOptions); // base class 인 User 클래스의 constructor 호출
+          this.isAdmin = isAdmin;
+        }
+
+        deleteWebsite() {
+          console.log("deleting the whole website...");
+        }
+      }
+
+      const newAdmin = new Admin({
+        username: "superAdmin", 
+        lastName: "sysop",
+        email: "admin@ggg.com", 
+        pw: "5678", 
+        isAdmin: true
+      });
+      newAdmin.deleteWebsite();
+      newAdmin.getProifile();
+    
+      // Recap
+      // class에 대해 알아야 할 내용 : (1) Extending Classes (2) this (3) super
+    </script>
+  </body>
+</html>

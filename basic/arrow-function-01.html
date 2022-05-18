@@ -15,29 +15,29 @@
         return item + "v1";
       };
       const heart = names.map(addHeart);
-      console.log(heart);
+      console.log(`func01 : ${heart}`);
 
       // 2.
       const heart2 = names.map(function(item, index) {
         console.log("index : ", index);
         return item + "v2";
       });
-      console.log(heart2);
+      console.log(`func02 : ${heart2}`);
 
       // 3. function 과 return 없이 함수를 선언하고 리턴 (implicit return)
       // = item 이라는 argument를 가지고 itemS2 를 리턴
       const heart3 = names.map( item => item + "v2" );
-      console.log(heart3);
+      console.log(`func03 : ${heart3}`);
       // 3-1. argument 가 2개 이상이면 (item, index) 처럼 괄호로 묶어줘야 함
       const heart4 = names.map( (item, index) => item + ", index:" + index);
-      console.log(heart4);
+      console.log(`func04 : ${heart4}`);
       // 3-2. argument 가 없는 경우
       const heart5 = names.map( () => "S2" );
-      console.log(heart5);
+      console.log(`func05 : ${heart5}`);
       
       // cf. => 뒤에 {}이 추가되면 더이상 implicit return 역할을 못하게 됨
       const heart6 = names.map( item => { item + "v2" });
-      console.log(heart6);
+      console.log(`func06 : ${heart6}`);
 
     </script>
   </body>

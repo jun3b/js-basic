@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>JS study</title>
+  </head>
+  <body>
+    <script>
+      class User {
+        constructor({username, lastName, email, pw}) {
+          this.username = username;
+          this.lastName = lastName;
+          this.email = email;
+          this.pw = pw;
+        }
+        sayHello() {
+          console.log(`hello, i'm ${this.username}`);
+        }
+        getProifile() {
+          console.log(`${this.username}, ${this.email}, ${this.pw}`);
+        }
+        updatePw(newPw, currentPw) {
+          if(currentPw === this.pw) {
+            this.pw = newPw;
+          } else {
+            console.log("can't change pw");
+          }
+        }
+      }
+
+      const firstUser = new User({
+        username:"nico", 
+        lastName:"last",
+        email:"nico@ggg.com", 
+        pw:"1234"
+      });
+      firstUser.getProifile();
+
+      console.log(firstUser.pw);
+      const firstUpdatePw = firstUser.updatePw("hello", "1234");
+      console.log(firstUser.pw);
+
+      class Admin extends User {
+        constructor({username, lastName, email, pw, isAdmin, isActive}) {
+          super({username, lastName, email, pw}); // base class 인 User 클래스의 constructor 호출
+          this.isAdmin = isAdmin;
+          this.isActive = isActive;
+        }
+
+        deleteWebsite() {
+          console.log("deleting the whole website...");
+        }
+      }
+
+      const newAdmin = new Admin({
+        username: "superAdmin", 
+        lastName: "sysop",
+        email: "admin@ggg.com", 
+        pw: "5678", 
+        isAdmin: true,
+        isActive: false
+      });
+      newAdmin.deleteWebsite();
+      newAdmin.getProifile();
+    
+    </script>
+  </body>
+</html>
